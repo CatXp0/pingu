@@ -1,0 +1,8 @@
+#services:
+#    Symfony\Component\Cache\Marshaller\SodiumMarshaller:
+#        decorates: cache.default_marshaller
+#        arguments:
+#            - ['%env(base64:CACHE_DECRYPTION_KEY)%']
+#            # use multiple keys in order to rotate them
+#            #- ['%env(base64:CACHE_DECRYPTION_KEY)%', '%env(base64:OLD_CACHE_DECRYPTION_KEY)%']
+#            - '@.inner'

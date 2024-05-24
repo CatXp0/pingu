@@ -260,3 +260,67 @@ sylius_theme:
             scan_depth: 1
             directories:
                 - "%kernel.project_dir%/themes"
+
+sylius_grid:
+    grids:
+        sylius_admin_product_review:
+            fields:
+                affectiveItemsAnalysisRating:
+                    type: string
+                    label: "Analysis Rating"
+                    sortable: ~
+                    position: 4
+                date:
+                    position: 1
+                title:
+                    position: 7
+                    enabled: false
+                rating:
+                    position: 3
+                status:
+                    position: 6
+                reviewSubject:
+                    position: 2
+                author:
+                    position: 5
+            filters:
+                title:
+                    type: string
+                    label: sylius.ui.title
+                reviewSubject:
+                    type: entity
+                    label: sylius.ui.product
+                    form_options:
+                        class: "%sylius.model.product.class%"  
+        sylius_admin_product:
+            fields:
+                image:
+                    position: 1
+                code:
+                    position: 2
+                name:
+                    position: 3
+                mainTaxon:
+                    position: 4
+                    enabled: false
+                enabled:
+                    position: 5
+                affectiveItemsAnalysisAverageRating:
+                    type: string
+                    label: "Average Analysis Rating"
+                    sortable: ~
+                    position: 4
+            actions:
+                subitem:
+                    reviews:
+                        type: links
+                        label: sylius.ui.manage_reviews
+                        options:
+                            icon: list
+                            links:
+                                index:
+                                    label: sylius.ui.manage_reviews_of_your_products
+                                    icon: list
+                                    route: sylius_admin_product_review_index
+                                    parameters:
+                                        criteria[reviewSubject]: resource.id

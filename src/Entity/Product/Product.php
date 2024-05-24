@@ -16,6 +16,19 @@ use Sylius\Component\Product\Model\ProductTranslationInterface;
 #[ORM\Table(name: 'sylius_product')]
 class Product extends BaseProduct
 {
+    /** @ORM\Column(type="float", nullable=true) */
+    private ?float $affectiveItemsAnalysisAverageRating;
+
+    public function getAffectiveItemsAnalysisAverageRating(): ?float
+    {
+        return $this->affectiveItemsAnalysisAverageRating;
+    }
+
+    public function setAffectiveItemsAnalysisAverageRating(float $affectiveItemsAnalysisAverageRating): void
+    {
+        $this->affectiveItemsAnalysisAverageRating = $affectiveItemsAnalysisAverageRating;
+    }
+
     protected function createTranslation(): ProductTranslationInterface
     {
         return new ProductTranslation();

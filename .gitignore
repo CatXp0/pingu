@@ -52,3 +52,5 @@
 /yarn.lock
 /package-lock.json
 ###< symfony/webpack-encore-bundle ###
+
+/.idea/*

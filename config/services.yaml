@@ -1,3 +1,13 @@
+# Put parameters here that don't need to change on each machine where the app is deployed
+# https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
+parameters:
+    locale: en_US
+    pingu_api.analyis.endpoint: host.docker.internal:8000/api/sentiment/analyze
+    pingu_api.authentication.endpoint: host.docker.internal:8000/api/token
+    pingu_api.authentication.payload:
+        username: "pingu"
+        password: "secret"
+
 services:
     # Default configuration for services in *this* file
     _defaults:
@@ -28,3 +38,16 @@ services:
     App\Controller\:
         resource: '../src/Controller'
         tags: ['controller.service_arguments']
+
+    app.form.extension.type.review:
+        class: App\Form\Extension\ReviewTypeExtension
+        tags:
+            - { name: form.type_extension, extended_type: Sylius\Bundle\ReviewBundle\Form\Type\ReviewType }
+
+    app.form.extension.type.product:
+        class: App\Form\Extension\ProductTypeExtension
+        tags:
+            - { name: form.type_extension, extended_type: Sylius\Bundle\ProductBundle\Form\Type\ProductType }
+
+    GuzzleHttp\Client: '@sylius.http_client'
+    App\Service\AuthenticationServiceInterface: '@App\Service\AuthenticationService'

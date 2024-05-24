@@ -1,0 +1,32 @@
+{% include '@SyliusAdmin/Product/Show/_header.html.twig' %}
+
+<div class="ui grid">
+    <div class="sixteen wide mobile ten wide computer column">
+        {% include '@SyliusAdmin/Product/Show/_taxonomy.html.twig' %}
+    </div>
+    <div class="sixteen wide mobile six wide computer column">
+        {% include '@SyliusAdmin/Product/Show/_options.html.twig' %}
+    </div>
+</div>
+<div class="ui hidden divider"></div>
+<div class="ui grid">
+    <div class="sixteen wide column">
+        <h4 class="ui top attached large header">{{ 'sylius.ui.product_reviews'|trans }}</h4>
+        {% include 'bundles/SyliusAdminBundle/Product/Show/_reviews.html.twig' %}
+    </div>
+</div>
+<div class="ui hidden divider"></div>
+{% include '@SyliusAdmin/Product/Show/_media.html.twig' %}
+{#<div class="ui hidden divider"></div>#}
+{#{% include '@SyliusAdmin/Product/Show/_moreDetails.html.twig' %}#}
+<div class="ui hidden divider"></div>
+<div class="ui grid">
+    <div class="sixteen wide mobile ten wide computer column">
+        {% include '@SyliusAdmin/Product/Show/_attributes.html.twig' %}
+    </div>
+    <div class="sixteen wide mobile six wide computer column">
+        {% include '@SyliusAdmin/Product/Show/_associations.html.twig' %}
+    </div>
+</div>
+<div class="ui hidden divider"></div>
+{{ sylius_template_event('sylius.admin.configurable_product.show', _context) }}
