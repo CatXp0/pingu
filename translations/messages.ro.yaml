@@ -1,0 +1,20 @@
+sylius:
+    top_bar: 'Abonează-te la newsletter și prinde -20% reducere la prima ta comandă'
+    homepage:
+        about_us_content: 'Bine ai venit la magazinul nostru, magazinul tău numărul unu online, care îți oferă cele mai bune produse. Poți alege din cele mai bune produse de ingrijire din oferta noastră. '
+        banner_content: 'Pregătește-te pentru soare cu oferte speciale!'
+        newsletter: 'Buletin Informativ'
+        newsletter_description: 'Abonează-te la newsletter-ul nostru pentru a vedea ofertele noi care te așteaptă!'
+        subscribe: 'Abonează-te'
+        banner_button: 'Vezi cele mai noi produse'
+        carousel_header: 'Produse populare'
+    footer:
+        banner:
+            free_shipping_title: 'Transport & retur gratuit'
+            free_shipping_content: 'Transport gratuit pentru toate comenzile'
+            multiple_payments_title: 'Multiple modalități de plata'
+            multiple_payments_content: 'Acceptăm plata cu cardul și PayPal/Stripe'
+            guarantee_title: 'Banii înapoi garantat'
+            guarantee_content: 'Primești banii înapoi în maxim 30 de zile'
+    ui:
+        your_store: 'Pingu'

@@ -14,30 +14,32 @@ use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 class ProductReviewService
 {
     public function __construct(
-        private PinguApiClient $client,
-        private ParameterBagInterface $params,
+        private readonly PinguApiClient $client,
+        private readonly ParameterBagInterface $params,
     ) {
     }
 
     /**
-     * @throws ApiRequestFailedException
-     * @throws \JsonException
+     * Metoda care face request pentru un scor al itemilor afectivi ai unui feedback
+     * @throws ApiRequestFailedException|\JsonException
      */
     public function getAffectiveItemsAnalysisRating(string $reviewContent): AffectiveItemsAnalysis
     {
+        // construim requestul cu continutul feedback-ului si endpointul pentru API
         $request = new GetRealRatingForProductReviewRequest(
             $reviewContent,
             $this->params->get('pingu_api.analyis.endpoint'),
         );
+        // facem requestul
         $response = $this->client->request($request);
-
+        // decodam continutul in obiect
         $contents = json_decode(
             $response->getBody()->getContents(),
             false,
             512,
             JSON_THROW_ON_ERROR,
         );
-
+        // returnam DTO AffectiveItemsAnalysis cu datele din API
         return new AffectiveItemsAnalysis(
             affectiveItemsAnalysisRating: (int)$contents->affectiveItemsAnalysisRating,
             confidence: $contents->confidence,

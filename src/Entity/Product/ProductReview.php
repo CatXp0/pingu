@@ -15,7 +15,10 @@ use Sylius\Component\Core\Model\ProductReview as BaseProductReview;
 #[ORM\Table(name: 'sylius_product_review')]
 class ProductReview extends BaseProductReview
 {
-    /** @ORM\Column(type="float", nullable=true) */
+    /**
+     * Proprietate noua pentru a stoca scorul din urma analizei itemilor afectivi
+     * @ORM\Column(type="float", nullable=true)
+     */
     private ?float $affectiveItemsAnalysisRating;
 
     public function getAffectiveItemsAnalysisRating(): ?float

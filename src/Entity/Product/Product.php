@@ -16,8 +16,11 @@ use Sylius\Component\Product\Model\ProductTranslationInterface;
 #[ORM\Table(name: 'sylius_product')]
 class Product extends BaseProduct
 {
-    /** @ORM\Column(type="float", nullable=true) */
-    private ?float $affectiveItemsAnalysisAverageRating;
+    /**
+     * Proprietate noua pentru a stoca scorul mediu din urma analizei itemilor afectivi la nivel de feedback
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private ?float $affectiveItemsAnalysisAverageRating = null;
 
     public function getAffectiveItemsAnalysisAverageRating(): ?float
     {

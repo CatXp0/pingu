@@ -1,0 +1,13 @@
+<div class="homepage-banner">
+    <div class="homepage-banner__image">
+        {% if use_webpack %}
+            <img style="color: #213153;" src="{{ asset('build/app/shop/images/homepage-banner.webp', 'app.shop') }}" alt="{{ 'sylius.homepage.banner_content'|trans }}">
+        {% else %}
+            <img style="color: #213153;" src="{{ asset('build/app/shop/images/homepage-banner.webp', 'app.shop') }}" alt="{{ 'sylius.homepage.banner_content'|trans }}">
+        {% endif %}
+    </div>
+    <div class="homepage-banner__content">
+        <div style="color: #213153;">{{ 'sylius.homepage.banner_content'|trans }}</div>
+        <a style="color: #fff !important; background-color: #213153 !important; padding: 10px !important; text-decoration: none !important;" href="#" class="ui huge primary button">{{ 'sylius.homepage.banner_button'|trans }}</a>
+    </div>
+</div>

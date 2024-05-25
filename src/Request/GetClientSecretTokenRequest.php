@@ -12,7 +12,7 @@ class GetClientSecretTokenRequest extends Request
     /**
      * @throws InvalidArgumentException
      */
-    public function __construct(private string $endpoint)
+    public function __construct(private readonly string $endpoint)
     {
         parent::__construct(
             'POST',

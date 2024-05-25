@@ -1,10 +1,10 @@
 framework:
     messenger:
         transports:
+            # folosim message transporter doctrine
             async: "%env(MESSENGER_TRANSPORT_DSN)%"
         
         routing:
-            # async is whatever name you gave your transport above
             'App\Message\UpdateAffectiveItemsAnalysisRating': async
             'App\Message\AddAffectiveItemsAnalysisRating': async
             'App\Message\DeleteAffectiveItemsAnalysisRating': async

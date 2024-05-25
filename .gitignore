@@ -54,3 +54,4 @@
 ###< symfony/webpack-encore-bundle ###
 
 /.idea/*
+.idea/*

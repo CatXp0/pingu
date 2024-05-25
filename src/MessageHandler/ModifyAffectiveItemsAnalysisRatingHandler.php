@@ -20,26 +20,31 @@ use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 final class ModifyAffectiveItemsAnalysisRatingHandler
 {
     public function __construct(
-        private ProductReviewService $productReviewService,
-        private ProductReviewRepository $productReviewRepository,
-        private ProductRepository $productRepository,
-        private AffectiveItemsAnalysisAverageRatingUpdater $averageRatingUpdater,
-        private EntityManagerInterface $reviewSubjectManager,
-        private LoggerInterface $logger,
+        private readonly ProductReviewService $productReviewService,
+        private readonly ProductReviewRepository $productReviewRepository,
+        private readonly ProductRepository $productRepository,
+        private readonly AffectiveItemsAnalysisAverageRatingUpdater $averageRatingUpdater,
+        private readonly EntityManagerInterface $reviewSubjectManager,
+        private readonly LoggerInterface $logger,
     ) {
     }
 
     #[AsMessageHandler]
     public function handleCreate(AddAffectiveItemsAnalysisRating $message): void
     {
-        /** @var ProductReview $review */
+        /**
+         * Cautam feedback-ul dupa id
+         * @var ProductReview $review
+         */
         $review = $this->productReviewRepository->find($message->getReviewId());
 
         try {
+            // facem request pentru scorul feedback-ului
             $affectiveItemsAnalysisRating = $this->productReviewService->getAffectiveItemsAnalysisRating(
                 $message->getReviewContent(),
             );
 
+            // setam in baza de date scorul
             $review->setAffectiveItemsAnalysisRating(
                 $affectiveItemsAnalysisRating->ratingProbability->getProbabilityRating(),
             );
@@ -58,18 +63,22 @@ final class ModifyAffectiveItemsAnalysisRatingHandler
     #[AsMessageHandler]
     public function handleUpdate(UpdateAffectiveItemsAnalysisRating $message): void
     {
-        /** @var ProductReview $review */
+        /**
+         * Cautam feedback-ul dupa id
+         * @var ProductReview $review
+         */
         $review = $this->productReviewRepository->find($message->getReviewId());
 
         try {
+            // facem request pentru scorul feedback-ului
             $affectiveItemsAnalysisRating = $this->productReviewService->getAffectiveItemsAnalysisRating(
                 $message->getReviewContent(),
             );
-
+            // setam in baza de date scorul
             $review->setAffectiveItemsAnalysisRating(
                 $affectiveItemsAnalysisRating->ratingProbability->getProbabilityRating(),
             );
-
+            // recalculam scorul total al produsului
             $this->averageRatingUpdater->updateFromReview($review);
         } catch (\Throwable $exception) {
             $this->logger->error('Could not get affective items analysis rating for product review', [

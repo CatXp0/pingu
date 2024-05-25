@@ -304,12 +304,17 @@ sylius_grid:
                     position: 4
                     enabled: false
                 enabled:
-                    position: 5
+                    position: 6
                 affectiveItemsAnalysisAverageRating:
                     type: string
-                    label: "Average Analysis Rating"
+                    label: "AI Rating"
                     sortable: ~
                     position: 4
+                averageRating:
+                    type: string
+                    label: "Real Rating"
+                    sortable: ~
+                    position: 5
             actions:
                 subitem:
                     reviews:

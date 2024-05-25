@@ -17,11 +17,14 @@ class PinguApiClient
 {
     private Client $client;
 
-    public function __construct(private RefreshTokenRequestMiddleware $refreshTokenRequestMiddleware)
+    public function __construct(private readonly RefreshTokenRequestMiddleware $refreshTokenRequestMiddleware)
     {
+        // stiva de middlewareuri care sunt executate in ordine cand clientul Guzzle face un request
         $handlerStack = HandlerStack::create();
+        // adaugam middleware-ul nostru in stiva
         $handlerStack->push($this->refreshTokenRequestMiddleware);
 
+        // declaram optiunile cu care initializam clientul
         $options = [
             'handler' => $handlerStack,
             RequestOptions::HEADERS => [
@@ -37,6 +40,8 @@ class PinguApiClient
     }
 
     /**
+     * Metoda care face un request care implementeaza RequestInterface cu ajutorul clientului
+     *
      * @throws ApiRequestFailedException
      */
     public function request(RequestInterface $request, array $options = []): ResponseInterface

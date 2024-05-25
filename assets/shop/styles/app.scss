@@ -1,0 +1,29 @@
+$primary-color-navy-dark: #213153;
+$primary-color-navy-light: #475474;
+$primary-color-pink-dark: #d66679;
+$primary-color-pink-light: #ffceca;
+
+a:hover {
+    color: $primary-color-pink-dark !important;
+}
+
+.footer.segment {
+    color: $primary-color-navy-dark;
+}
+
+.footer .pre-footer {
+    background: $primary-color-pink-dark;
+}
+
+.pusher > #menu::after {
+    background-color: $primary-color-pink-dark !important;
+}
+
+header .ui.three.column.stackable.grid > .column:nth-child(3) .button .icon {
+    color: $primary-color-pink-dark;
+}
+
+.ui.button:hover {
+    background: rgb(255, 206, 202, 0.1725490196) !important;
+    border-color: rgb(214, 102, 121, 0.2705882353) !important;
+}
