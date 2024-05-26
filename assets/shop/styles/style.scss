@@ -1,0 +1,68 @@
+$primary-color-navy-dark: #213153;
+$primary-color-navy-light: #475474;
+$primary-color-pink-dark: #d66679;
+$primary-color-pink-darkest: #a14d5b;
+$primary-color-pink-light: #ffceca;
+
+.top-menu__link {
+    color: #fff !important;
+}
+
+a {
+    color: $primary-color-pink-dark !important;
+}
+
+a:hover {
+    color: $primary-color-pink-darkest !important;
+}
+
+.footer.segment {
+    color: $primary-color-navy-dark;
+}
+
+.footer .pre-footer {
+    background: $primary-color-pink-dark;
+}
+
+.pusher > #menu::after {
+    background-color: $primary-color-pink-dark !important;
+}
+
+header .ui.three.column.stackable.grid > .column:nth-child(3) .button .icon {
+    color: $primary-color-pink-dark;
+}
+
+.ui.button:hover,
+[data-route=sylius_shop_product_show] .ui.two.column.stackable.grid > .column:last-child .form > .button:hover,
+header .ui.three.column.stackable.grid > .column:nth-child(3) .button:hover,
+.ui.labeled.icon.button:hover {
+    background: rgb(255, 206, 202, 0.1725490196) !important;
+    border-color: rgb(214, 102, 121, 0.2705882353) !important;
+    color: $primary-color-pink-dark !important;
+}
+
+.ui.button.primary, [data-route=sylius_shop_product_show] .ui.two.column.stackable.grid > .column:last-child .form > .button {
+    background-color: $primary-color-pink-dark !important;
+    border-color: $primary-color-pink-dark !important;
+}
+
+[data-route=sylius_shop_product_show] .ui.top.attached.large.tabular.menu .item.active {
+    border-color: $primary-color-pink-dark;
+}
+
+[data-route=sylius_shop_homepage] .ui.huge.header::after, .ui.horizontal.section.divider.header::after,
+.ui.star.rating .active.icon {
+    color: $primary-color-pink-dark !important;
+}
+
+.ui.left.center.popup {
+    text-align: center;
+}
+
+.ui.inverted.vertical.footer.segment .item {
+    color: #fff !important;
+}
+
+.ui.inverted.vertical.footer.segment .item:hover {
+    color: $primary-color-pink-dark !important;
+}

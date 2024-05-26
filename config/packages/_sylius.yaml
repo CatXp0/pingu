@@ -291,7 +291,7 @@ sylius_grid:
                     type: entity
                     label: sylius.ui.product
                     form_options:
-                        class: "%sylius.model.product.class%"  
+                        class: "%sylius.model.product.class%"
         sylius_admin_product:
             fields:
                 image:

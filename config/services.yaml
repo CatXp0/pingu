@@ -1,8 +1,8 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
-    locale: en_US
-    pingu_api.analyis.endpoint: host.docker.internal:8000/api/sentiment/analyze
+    locale: ro_RO
+    pingu_api.analyis.endpoint: host.docker.internal:8000/api/feedback/analyze
     pingu_api.authentication.endpoint: host.docker.internal:8000/api/token
     pingu_api.authentication.payload:
         username: "pingu"
@@ -51,3 +51,15 @@ services:
 
     GuzzleHttp\Client: '@sylius.http_client'
     App\Service\AuthenticationServiceInterface: '@App\Service\AuthenticationService'
+
+#    App\MessageHandler\ModifyAffectiveItemsAnalysisRatingHandler:
+#        tags:
+#            -   name: messenger.add_message_handler
+#                handles: App\Message\AddAffectiveItemsAnalysisRating
+#                method: handleCreate
+#            -   name: messenger.update_message_handler
+#                handles: App\Message\UpdateAffectiveItemsAnalysisRating
+#                method: handleUpdate
+#            -   name: messenger.delete_message_handler
+#                handles: App\Message\DeleteAffectiveItemsAnalysisRating
+#                method: handleDelete

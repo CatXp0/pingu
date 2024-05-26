@@ -6,8 +6,11 @@ namespace App\Message;
 
 final class DeleteAffectiveItemsAnalysisRating implements ModifyAffectiveItemsAnalysisRatingInterface
 {
-    public function __construct(private ?int $reviewId, private int $productId, private ?string $reviewContent)
-    {
+    public function __construct(
+        private readonly ?int $reviewId,
+        private readonly int $productId,
+        private readonly ?string $reviewContent,
+    ) {
     }
 
     public function getReviewContent(): ?string

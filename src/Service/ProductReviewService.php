@@ -9,6 +9,7 @@ use App\DTO\AffectiveItemsAnalysis;
 use App\DTO\RatingProbability;
 use App\Exception\ApiRequestFailedException;
 use App\Request\GetRealRatingForProductReviewRequest;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
 class ProductReviewService
@@ -16,6 +17,7 @@ class ProductReviewService
     public function __construct(
         private readonly PinguApiClient $client,
         private readonly ParameterBagInterface $params,
+        private readonly LoggerInterface $logger,
     ) {
     }
 
@@ -30,14 +32,16 @@ class ProductReviewService
             $reviewContent,
             $this->params->get('pingu_api.analyis.endpoint'),
         );
+
         // facem requestul
-        $response = $this->client->request($request);
+        $response = $this->client->request($request)->getBody()->getContents();
+
         // decodam continutul in obiect
         $contents = json_decode(
-            $response->getBody()->getContents(),
+            $response,
             false,
             512,
-            JSON_THROW_ON_ERROR,
+            JSON_THROW_ON_ERROR | JSON_UNESCAPED_SLASHES,
         );
         // returnam DTO AffectiveItemsAnalysis cu datele din API
         return new AffectiveItemsAnalysis(

@@ -7,14 +7,29 @@ namespace App\Client;
 use App\Exception\TokenRetrievalException;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ConnectException;
+use GuzzleHttp\RequestOptions;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Throwable;
 
 class PinguApiAuthenticationClient
 {
-    public function __construct(private Client $client)
+    private Client $client;
+
+    public function __construct()
     {
+        // declaram optiunile cu care initializam clientul
+        $options = [
+            RequestOptions::HEADERS => [
+                'Accept' => 'application/json',
+                'Content-Type' => 'application/json',
+            ],
+            RequestOptions::TIMEOUT => 30,
+            RequestOptions::CONNECT_TIMEOUT => 30,
+            RequestOptions::VERIFY => false
+        ];
+
+        $this->client = new Client($options);
     }
 
     /**

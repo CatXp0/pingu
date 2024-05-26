@@ -11,6 +11,9 @@ use Sylius\Component\Review\Model\ReviewInterface;
 
 class AffectiveItemsAnalysisAverageRatingCalculator implements ReviewableRatingCalculatorInterface
 {
+    /**
+     * Calculeaza media scorurilor itemilor afectivi
+     */
     public function calculate(ReviewableInterface $reviewable): float
     {
         $sum = 0;
@@ -19,10 +22,11 @@ class AffectiveItemsAnalysisAverageRatingCalculator implements ReviewableRatingC
 
         /** @var ProductReview $review */
         foreach ($reviews as $review) {
+            // daca feedback-ul nu are statusul accepted, nu il punem la socoteala
             if (ReviewInterface::STATUS_ACCEPTED !== $review->getStatus()) {
                 continue;
             }
-
+            // daca nu avem un rating pe feedback, nu il punem la socoteala
             if (is_null($review->getAffectiveItemsAnalysisRating())) {
                 continue;
             }
@@ -31,6 +35,7 @@ class AffectiveItemsAnalysisAverageRatingCalculator implements ReviewableRatingC
             $sum += $review->getAffectiveItemsAnalysisRating();
         }
 
+        // intoarcem media aritmetica daca avem feedbackuri, 0 daca nu
         return 0 !== $reviewsNumber ? $sum / $reviewsNumber : 0;
     }
 }

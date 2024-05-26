@@ -17,12 +17,14 @@ use App\Calculator\AffectiveItemsAnalysisAverageRatingCalculator;
 use App\Entity\Product\Product;
 use App\Entity\Product\ProductReview;
 use Doctrine\ORM\EntityManagerInterface;
+use Psr\Log\LoggerInterface;
 
 class AffectiveItemsAnalysisAverageRatingUpdater
 {
     public function __construct(
-        private AffectiveItemsAnalysisAverageRatingCalculator $averageRatingCalculator,
-        private EntityManagerInterface $reviewSubjectManager,
+        private readonly AffectiveItemsAnalysisAverageRatingCalculator $averageRatingCalculator,
+        private readonly EntityManagerInterface $entityManager,
+        private readonly LoggerInterface $logger,
     ) {
     }
 
@@ -31,6 +33,9 @@ class AffectiveItemsAnalysisAverageRatingUpdater
         $this->modifyReviewSubjectAffectiveItemsAnalysisAverageRating($reviewSubject);
     }
 
+    /**
+     * Updatam media scorului pentru un feedback
+     */
     public function updateFromReview(ProductReview $review): void
     {
         $this->modifyReviewSubjectAffectiveItemsAnalysisAverageRating($review->getReviewSubject());
@@ -39,13 +44,14 @@ class AffectiveItemsAnalysisAverageRatingUpdater
     private function modifyReviewSubjectAffectiveItemsAnalysisAverageRating(Product $product): void
     {
         $affectiveItemsAnalysisAverageRating = $this->averageRatingCalculator->calculate($product);
-
+        // daca scorul este 0 (adica nu avem niciun feedback), nu il punem
         if (0.0 === $affectiveItemsAnalysisAverageRating) {
             return;
         }
-
+        // setam proprietatea mediei analizei pe produs
         $product->setAffectiveItemsAnalysisAverageRating($affectiveItemsAnalysisAverageRating);
-
-        $this->reviewSubjectManager->flush();
+        // flush la schimbari in db
+        $this->entityManager->persist($product);
+        $this->entityManager->flush();
     }
 }

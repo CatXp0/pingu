@@ -17,8 +17,8 @@ use Symfony\Component\Messenger\MessageBusInterface;
 class ReviewChangedSubscriber implements EventSubscriberInterface
 {
     public function __construct(
-        private MessageBusInterface $messageBus,
-        private LoggerInterface $logger,
+        private readonly MessageBusInterface $messageBus,
+        private readonly LoggerInterface $logger,
     ) {
     }
 
@@ -34,6 +34,7 @@ class ReviewChangedSubscriber implements EventSubscriberInterface
 
     public function onCreate(ResourceControllerEvent|BlockEvent $event): void
     {
+        $this->logger->error('On create subscriber');
         if (!$event instanceof ResourceControllerEvent) {
             return;
         }
@@ -52,6 +53,7 @@ class ReviewChangedSubscriber implements EventSubscriberInterface
 
     public function onUpdate(ResourceControllerEvent|BlockEvent $event): void
     {
+        $this->logger->error('On update subscriber');
         if (!$event instanceof ResourceControllerEvent) {
             return;
         }
@@ -63,6 +65,13 @@ class ReviewChangedSubscriber implements EventSubscriberInterface
             $productReview->getId(),
             $productReview->getReviewSubject()->getId(),
             $productReview->getComment(),
+        );
+
+        $this->logger->error(
+            'dispatching update message',
+            [
+                'message' => $message->getReviewContent(),
+            ]
         );
 
         $this->messageBus->dispatch($message);

@@ -1,15 +1,27 @@
 monolog:
     handlers:
+        messenger_log:
+            type: stream
+            # log to var/log/(environment).log
+            path: "%kernel.logs_dir%/%kernel.environment%_messenger.log"
+            # log *all* messages (debug is lowest level)
+            level: debug
+            channels:
+                - 'messenger'
+        error_log:
+            type: stream
+            # log to var/log/(environment).log
+            path: "%kernel.logs_dir%/%kernel.environment%_error.log"
+            # log *all* messages (debug is lowest level)
+            level: error
         file_log:
             type: stream
             # log to var/log/(environment).log
             path: "%kernel.logs_dir%/%kernel.environment%.log"
             # log *all* messages (debug is lowest level)
             level: debug
-        main:
-            type: stream
-            path: "%kernel.logs_dir%/%kernel.environment%.log"
-            level: debug
+            channels:
+                - '!deprecation'
         firephp:
             type: firephp
             level: info

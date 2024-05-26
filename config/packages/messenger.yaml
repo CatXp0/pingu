@@ -1,10 +1,10 @@
 framework:
     messenger:
         transports:
+            # DSN-ul va indica cum și unde să fie trimise mesajele pentru procesare asincronă.
             # folosim message transporter doctrine
             async: "%env(MESSENGER_TRANSPORT_DSN)%"
         
+        # orice mesaj de aceste tipuri va fi gestionat asincron
         routing:
-            'App\Message\UpdateAffectiveItemsAnalysisRating': async
-            'App\Message\AddAffectiveItemsAnalysisRating': async
-            'App\Message\DeleteAffectiveItemsAnalysisRating': async
+            'App\Message\ModifyAffectiveItemsAnalysisRatingInterface': async

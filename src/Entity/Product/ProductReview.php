@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Entity\Product;
 
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Sylius\Component\Core\Model\ProductReview as BaseProductReview;
 
@@ -15,15 +16,12 @@ use Sylius\Component\Core\Model\ProductReview as BaseProductReview;
 #[ORM\Table(name: 'sylius_product_review')]
 class ProductReview extends BaseProductReview
 {
-    /**
-     * Proprietate noua pentru a stoca scorul din urma analizei itemilor afectivi
-     * @ORM\Column(type="float", nullable=true)
-     */
-    private ?float $affectiveItemsAnalysisRating;
+    #[ORM\Column(type: Types::FLOAT, nullable: true)]
+    private ?float $affectiveItemsAnalysisRating = null;
 
     public function getAffectiveItemsAnalysisRating(): ?float
     {
-        return $this->affectiveItemsAnalysisRating;
+        return $this->affectiveItemsAnalysisRating  ;
     }
 
     public function setAffectiveItemsAnalysisRating(?float $affectiveItemsAnalysisRating): void

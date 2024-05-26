@@ -1,0 +1,35 @@
+$primary-color-navy-dark: #213153;
+$primary-color-navy-light: #475474;
+$primary-color-pink-dark: #d66679;
+$primary-color-pink-darkest: #a14d5b;
+$primary-color-pink-light: #ffceca;
+
+.sylius-tree ul li a {
+    color: $primary-color-pink-dark !important;
+}
+
+.sylius-tree ul li a:hover {
+    color: $primary-color-pink-darkest !important;
+}
+
+.admin-layout__nav .item.active {
+    background: $primary-color-pink-dark !important;
+}
+
+.ui.header .circular.icon {
+    color: $primary-color-pink-dark;
+}
+
+.ui.primary.button {
+    background-color: $primary-color-pink-dark !important;
+}
+
+.ui.primary.button:hover {
+    background: rgb(255, 206, 202, 0.1725490196) !important;
+    border-color: rgb(214, 102, 121, 0.2705882353) !important;
+    color: $primary-color-pink-dark !important;
+}
+
+.admin-layout.admin-layout--open .admin-layout__sidebar {
+    background-color: $primary-color-navy-dark;
+}
