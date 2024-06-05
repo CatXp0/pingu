@@ -1,2 +1,7 @@
 sylius_paypal_webhook:
     resource: "@SyliusPayPalPlugin/Resources/config/webhook_routing.yaml"
+
+product_review_statistics:
+    path: /admin/reviews-statistics
+    defaults: { _controller: App\Controller\ReviewsController:getRawData }
+    methods: [GET]

@@ -1,0 +1,145 @@
+{% set labels, values = sales_summary.intervals, sales_summary.sales %}
+{% set color_data = {0: "filter: invert(74%) sepia(29%) saturate(2138%) hue-rotate(83deg) brightness(89%) contrast(88%);",
+    1: "filter: invert(35%) sepia(95%) saturate(5881%) hue-rotate(346deg) brightness(103%) contrast(101%);",
+    2: "filter: invert(67%) sepia(95%) saturate(3345%) hue-rotate(3deg) brightness(104%) contrast(107%);",
+    3: "filter: invert(93%) sepia(85%) saturate(347%) hue-rotate(354deg) brightness(103%) contrast(103%);",
+    4: "filter: invert(64%) sepia(45%) saturate(2123%) hue-rotate(73deg) brightness(96%) contrast(88%);",
+    5: "filter: invert(74%) sepia(29%) saturate(2138%) hue-rotate(83deg) brightness(89%) contrast(88%);"
+} %}
+{% set total_average_user_rating = statistics.total_average_user_rating|round %}
+{% set total_average_ai_rating = statistics.total_average_ai_rating|round %}
+
+<div class="ui grid">
+    <div class="column">
+        <div class="ui attached segment spaceless">
+            <div class="stats-grid" style="display: flex; justify-content: center;">
+                <div class="stats-column" style="padding: 10px;">
+                    <div class="ui tiny statistic">
+                        <div id="new-orders" data-stats-summary="total_average_user_rating" class="value" style="padding-bottom: 10px;">
+                            {{ statistics.total_average_user_rating }} <i class="icon circle" style="{{ color_data[total_average_user_rating] }}"></i>
+                        </div>
+                        <div class="label">
+                            Scorul mediu total recenzii
+                        </div>
+                    </div>
+                </div>
+                <div class="stats-column" style="text-align: center; padding: 10px;">
+                    <div class="ui tiny statistic">
+                        <div id="new-orders" data-stats-summary="total_average_ai_rating" class="value" style="padding-bottom: 10px;">
+                            {{ statistics.total_average_ai_rating }} <i class="icon circle" style="{{ color_data[total_average_ai_rating] }}"></i>
+                        </div>
+                        <div class="label">
+                            Scorul mediu total AI
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="ui hidden divider"></div>
+        <div class="stats">
+            <div class="ui top attached action header">
+                <div class="ui buttons">
+                    <button
+                        class="ui basic button"
+                        data-stats-button="week"
+                        data-stats-url="{{ url('product_reviews_statistics', {'channelCode': channel.channel_code, 'productId': product_id}) }}">
+                        {{ 'sylius.ui.statistics.2weeks'|trans }}
+                    </button>
+                    <button
+                        class="ui basic button"
+                        data-stats-button="month"
+                        data-stats-url="{{ url('product_reviews_statistics', {'channelCode': channel.channel_code, 'productId': product_id}) }}">
+                        {{ 'sylius.ui.statistics.month'|trans }}
+                    </button>
+                    <button
+                        class="ui basic button"
+                        data-stats-button="year"
+                        data-stats-url="{{ url('product_reviews_statistics', {'channelCode': channel.channel_code, 'productId': product_id}) }}">
+                        {{ 'sylius.ui.statistics.year'|trans }}
+                    </button>
+                </div>
+            </div>
+            <div class="ui attached segment spaceless">
+                <div class="stats-grid">
+                    <div class="stats-column">
+                        <div class="ui tiny statistic">
+                            <div id="total-sales" data-stats-summary="average" class="value" style="padding-bottom: 10px;">
+                                {{ statistics.average }}
+                            </div>
+                            <div class="label">
+                                Scorul mediu
+                            </div>
+                        </div>
+                    </div>
+                    <div class="stats-column">
+                        <div class="ui tiny statistic">
+                            <div id="total-sales" data-stats-summary="pearson_correlation_coefficient" class="value" style="padding-bottom: 10px;">
+                                {{ statistics.pearson_correlation_coefficient }}
+                            </div>
+                            <div class="label">
+                                Coeficientul de corelatie Pearson
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="stats-grid">
+                    <div class="stats-column">
+                        <div class="ui tiny statistic">
+                            <div id="new-orders" data-stats-summary="standard_deviation" class="value" style="padding-bottom: 10px;">
+                                {{ statistics.standard_deviation }}
+                            </div>
+                            <div class="label">
+                                Deviatia standard
+                            </div>
+                        </div>
+                    </div>
+                    <div class="stats-column">
+                        <div class="ui tiny statistic">
+                            <div id="new-customers" data-stats-summary="percentage_of_positive_reviews" class="value" style="padding-bottom: 10px;">
+                                {{ statistics.percentage_of_positive_reviews }}
+                            </div>
+                            <div class="label">
+                                Procentul de feedback-uri pozitive
+                            </div>
+                        </div>
+                    </div>
+                    <div class="stats-column">
+                        <div class="ui tiny statistic">
+                            <div id="average-order-value" data-stats-summary="mode_sentiment_score" class="value" style="padding-bottom: 10px;">
+                                {{ statistics.mode_sentiment_score }}
+                            </div>
+                            <div class="label">
+                                Modul scorului
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% if labels and values %}
+                <div class="ui bottom attached segment stats-graph">
+                    <button id="navigation-prev"
+                            class="navigation navigation-prev"
+                            interval="year"
+                            data-stats-url="{{ url('product_reviews_statistics', {'channelCode': channel.channel_code, 'productId': product_id}) }}">
+                        <i class="angle left icon"></i>
+                    </button>
+                    <canvas
+                        id="stats-graph"
+                        data-labels="{{ labels|json_encode() }}"
+                        data-values="{{ values|json_encode() }}"
+                        data-currency="{{ channel.base_currency_code|sylius_currency_symbol }}">
+                    </canvas>
+                    <button id="navigation-next"
+                            class="navigation navigation-next"
+                            interval="year"
+                            data-stats-url="{{ url('product_reviews_statistics', {'channelCode': channel.channel_code, 'productId': product_id}) }}">
+                        <i class="angle right icon"></i>
+                    </button>
+                </div>
+            {% endif %}
+            <div class="ui inverted dimmer stats-loader">
+                <div class="ui loader"></div>
+            </div>
+        </div>
+    </div>
+</div>

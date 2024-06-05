@@ -1,7 +1,7 @@
 sylius:
     top_bar: 'Abonează-te la newsletter și prinde -20% reducere la prima ta comandă'
     homepage:
-        about_us_content: 'Bine ai venit la magazinul nostru, magazinul tău numărul unu online, care îți oferă cele mai bune produse. Poți alege din cele mai bune produse de ingrijire din oferta noastră. '
+        about_us_content: 'Bine ai venit la magazinul tău online numărul unu! Poți alege din cele mai bune produse de îngrijire din oferta noastră. '
         banner_content: 'Pregătește-te pentru soare cu oferte speciale!'
         newsletter: 'Buletin Informativ'
         newsletter_description: 'Abonează-te la newsletter-ul nostru pentru a vedea ofertele noi care te așteaptă!'
@@ -18,3 +18,7 @@ sylius:
             guarantee_content: 'Primești banii înapoi în maxim 30 de zile'
     ui:
         your_store: 'Pingu'
+        statistics:
+            year: 'Anual'
+            month: 'Lunar'
+            2weeks: 'Ultimele 2 săptămâni'

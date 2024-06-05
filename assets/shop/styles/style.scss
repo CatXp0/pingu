@@ -66,3 +66,15 @@ header .ui.three.column.stackable.grid > .column:nth-child(3) .button:hover,
 .ui.inverted.vertical.footer.segment .item:hover {
     color: $primary-color-pink-dark !important;
 }
+
+.pusher > #menu .menu .item {
+    color: #fff !important;
+}
+
+.homepage .carousel-nav .carousel-left, .homepage .carousel-nav .carousel-right {
+    color: $primary-color-pink-dark !important;
+}
+
+#products.three.cards {
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+}

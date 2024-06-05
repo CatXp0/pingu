@@ -3,10 +3,11 @@
 <div class="ui grid">
     <div class="sixteen wide mobile ten wide computer column">
         {{ sylius_template_event('sylius.admin.simple_product.show.details', _context) }}
-        <div class="ui hidden divider"></div>
-        {{ sylius_template_event('sylius.admin.simple_product.show.taxonomy', _context) }}
     </div>
     <div class="sixteen wide mobile six wide computer column">
+        {{ sylius_template_event('sylius.admin.simple_product.show.taxonomy', _context) }}
+    </div>
+    <div class="sixteen wide mobile twelve wide computer column">
         {{ sylius_template_event('sylius.admin.simple_product.show.pricing', _context) }}
         <div class="ui hidden divider"></div>
         {{ sylius_template_event('sylius.admin.simple_product.show.shipping', _context) }}
@@ -25,5 +26,14 @@
     </div>
     <div class="sixteen wide mobile six wide computer column">
         {{ sylius_template_event('sylius.admin.simple_product.show.associations', _context) }}
+    </div>
+</div>
+
+<div class="ui hidden divider"></div>
+
+<div class="ui segment">
+    <h3>Recenzii</h3>
+    <div id="reviews-chart">
+        {{ render(controller('App\\Controller\\ReviewsController::renderStatistics', {'id': product.id})) }}
     </div>
 </div>
